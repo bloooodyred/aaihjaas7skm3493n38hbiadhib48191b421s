@@ -1,0 +1,219 @@
+@import "tailwindcss";
+@theme {
+  --color-brand-bg: #000000;                 /* pure black site background */
+  --color-brand-card: #14121b;              /* dark card violet */
+  --color-brand-navbar: #14121b;            /* navbar base */
+  --color-brand-active-tab: #ffffff;
+  --color-brand-inactive-tab: #27273a;      /* darker inactive */
+  --color-brand-text-primary: #ffffff;
+  --color-brand-text-secondary: #b3b3c7;    /* cool gray text */
+  --color-brand-text-dark: #000000;
+  --color-brand-yellow: #eab308;            /* keep if used elsewhere */
+  --color-brand-orange: #a21caf;            /* repurposed as purple-pink accent */
+  --font-sans: 'Inter', sans-serif;
+  --font-brand: 'DM Sans', sans-serif;
+}
+
+/* Hide genre badge on hover for specific rows */
+.no-genre-badge-on-hover .genre-badge {
+  opacity: 0 !important;
+}
+.no-genre-badge-on-hover .group:hover .genre-badge {
+  opacity: 0 !important;
+}
+
+/* CRITICAL: Force all elements to stay within viewport */
+* {
+  box-sizing: border-box;
+  max-width: 100vw;
+}
+
+/* Exception: allow icons and small elements to be flexible */
+svg, .icon, button svg, [class*="icon"] {
+  max-width: none !important;
+  /* Do NOT override width here so w-5/size-6 from Tailwind works */
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--font-brand);
+  background-color: var(--color-brand-bg);
+  overflow-x: hidden;
+  width: 100vw;
+  max-width: 100vw;
+}
+
+html, body, #root {
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Elegant, thin scrollbar (global) */
+/* Firefox */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+/* WebKit (Chromium, Safari, Edge) */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 8px;
+}
+html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  border: 2px solid transparent; /* creates inner padding */
+  background-clip: padding-box;
+}
+html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* Global safeguard: media shouldn't exceed container */
+img, video, svg, canvas, iframe {
+  max-width: 100% !important;
+  height: auto;
+}
+
+/* Force containers to stay within viewport */
+.container, div, section, main, header, footer {
+  max-width: 100vw !important;
+}
+
+/* Override Tailwind's pure black background to our dark gray site background */
+.bg-black { background-color: var(--color-brand-bg) !important; }
+
+/* Swiper specific fixes */
+.swiper, .swiper-container, .swiper-wrapper {
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+.swiper-slide {
+  max-width: 100vw !important;
+}
+/* index.css or global stylesheet */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #ffd321; /* Tailwind's yellow-400 */
+  background-color: rgb(24, 24, 24); /* Matches your brand-card */
+  border-radius: 9999px; /* fully rounded */
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: rgba(255, 255, 255, 0.095);
+}
+
+.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Reusable pill button style (matches sample) */
+.btn-pill {
+  @apply bg-brand-card/60 hover:bg-black/20 rounded-full text-white text-base md:text-lg p-2 cursor-pointer disabled:opacity-20;
+}
+
+/* Allow cards to overflow neighbors in content rows */
+.content-row-swiper {
+  overflow: visible !important;
+}
+.content-row-swiper .swiper-wrapper {
+  overflow: visible !important;
+}
+.content-row-swiper .swiper-slide {
+  overflow: visible !important;
+}
+.content-row-swiper .group:hover {
+  position: relative;
+  z-index: 30;
+}
+
+/* Normalize content-row spacing to avoid off-canvas overflows */
+.content-row-swiper {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Allow overflow for recommendations slider */
+.recommendations-swiper {
+  overflow: visible !important;
+}
+.recommendations-swiper .swiper-wrapper {
+  overflow: visible !important;
+}
+.recommendations-swiper .swiper-slide {
+  overflow: visible !important;
+}
+.recommendations-swiper .group:hover {
+  position: relative;
+  z-index: 30;
+}
+
+/* Allow overflow for official videos slider */
+.videos-swiper {
+  overflow: visible !important;
+}
+.videos-swiper .swiper-wrapper {
+  overflow: visible !important;
+}
+.videos-swiper .swiper-slide {
+  overflow: visible !important;
+}
+.videos-swiper .group:hover {
+  position: relative;
+  z-index: 30;
+}
+
+/* Hero slider pagination: bottom-right, styled bullets */
+.hero-swiper .swiper-pagination {
+  left: auto;
+  right: 0.75rem; /* ~12px from right */
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  width: auto;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #ffffff; /* white */
+  opacity: 0.95;
+  border: 1px solid #4b5563; /* gray-600 darker outline */
+  margin: 0 4px !important;
+  transition: background-color 300ms ease, transform 300ms ease, opacity 300ms ease, border-color 300ms ease;
+}
+
+.hero-swiper .swiper-pagination-bullet:hover {
+  opacity: 1;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  background: #a21caf; /* dark purple-pink */
+  border-color: #a21caf;
+  opacity: 1;
+  transform: scale(1.15);
+}
